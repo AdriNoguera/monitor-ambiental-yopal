@@ -1,4 +1,4 @@
-# Monitor Ambiental Yopal – conexión ThingSpeak
+# Monitor Ambiental Yopal – corrección de actualización automática
 
 Aplicación Streamlit conectada al canal público ThingSpeak `3561479`.
 
@@ -8,14 +8,12 @@ pip install -r requirements.txt
 streamlit run app.py
 ```
 
-## Publicar
-1. Sube `app.py` y `requirements.txt` a un repositorio de GitHub.
-2. Entra a https://share.streamlit.io/ y conecta GitHub.
-3. Crea una aplicación seleccionando el repositorio y `app.py`.
-4. Pulsa Deploy.
+## Publicar en Streamlit Community Cloud
+Repositorio: `AdriNoguera/monitor-ambiental-yopal`
+Rama: `main`
+Archivo principal: `app.py`
 
-La aplicación consulta `https://api.thingspeak.com/channels/3561479/feeds.json?results=8000`.
-Como el canal es público, no requiere Read API Key. El panel ejecuta una nueva consulta automáticamente cada 30 segundos y usa una caché de 30 segundos.
+La aplicación consulta la API pública:
+`https://api.thingspeak.com/channels/3561479/feeds.json?results=8000`
 
-## Nota
-La aplicación interpreta field1 como iluminancia, field2 como temperatura y field3 como humedad, conforme a las etiquetas del CSV suministrado. Contrasta estos nombres con la configuración real del canal ThingSpeak.
+El tablero se actualiza cada 30 segundos mediante `st.fragment`, sin usar componentes externos de auto-refresh.
